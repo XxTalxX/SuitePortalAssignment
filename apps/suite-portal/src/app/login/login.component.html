@@ -1,0 +1,31 @@
+<mat-grid-list cols="1" rowHeight="5:1">
+<mat-grid-tile>
+<mat-card>
+          <h2>Login</h2>
+      <mat-card-content>  
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+      <input matInput type="text" id="adminEmail" formControlName="adminEmail">
+      <mat-error *ngIf="loginForm.get('adminEmail').invalid && loginForm.get('adminEmail').touched">
+        Enter a valid email address.
+      </mat-error>
+</mat-form-field>
+
+<mat-form-field>
+<mat-label>Password</mat-label>
+<input matInput type="password" id="password" formControlName="password">
+<mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+  Password length is be between 4-10.
+</mat-error>
+</mat-form-field>
+      <button mat-raised-button color="accent" type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+</mat-card-content>
+
+</mat-card>
+</mat-grid-tile> 
+</mat-grid-list>
+<div class="alert" *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
+</div> 

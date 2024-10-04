@@ -16,6 +16,7 @@ export interface MaintenanceRequestData {
 const adapter = new FileSync<MaintenanceRequestDB>('./db/maint-requests.json')
 const db = low(adapter)
 
+
 db.defaults({ requests: [] }).write();
 
 @Injectable()
@@ -23,6 +24,7 @@ export class MaintenanceRequestDao {
 
   private get collection(): any {
     return db.get('requests');
+
   }
 
   constructor() {
@@ -43,5 +45,17 @@ export class MaintenanceRequestDao {
 
   async getMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
     return await this.collection.find({ id }).value();
+  }
+
+  async getMaintenanceRequests(): Promise<MaintenanceRequestDB>{
+    return await this.collection.value();
+  }
+
+  async closeMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
+    return await this.collection.chain().find({id: id}).assign({close: true}).write();
+  }
+
+  async reOpenMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
+    return await this.collection.chain().find({id: id}).assign({close: false}).write();
   }
 }

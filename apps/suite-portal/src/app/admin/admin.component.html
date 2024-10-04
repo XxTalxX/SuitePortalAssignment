@@ -1,0 +1,53 @@
+<table mat-table [dataSource]="openMaintenances">
+
+    <ng-container matColumnDef="unitNumber">
+        <th mat-header-cell *matHeaderCellDef> Unit </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.unitNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="serviceType">
+        <th mat-header-cell *matHeaderCellDef> Service Type </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.serviceType}} </td>
+    </ng-container>
+    <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.summary}} </td>
+    </ng-container>
+    <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef> Details </th>
+        <td mat-cell *matCellDef="let maintenance"> {{maintenance.details}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="openMaintenanceColumns;"></tr>
+    <tr mat-row style="cursor: pointer;" *matRowDef="let row; let index = index; columns: openMaintenanceColumns;" 
+    (click)="getMaintenance(index)"></tr>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let maintenance; let index = index">
+        <ng-container *ngIf="maintenance.close === false">
+            <button mat-raised-button color="accent"type="button" value="Close" (click)="closeRequest(index,maintenance.id)">Close</button>
+        </ng-container>
+        <ng-container *ngIf="maintenance.close === true">
+            Closed
+        </ng-container>
+      </td>
+    </ng-container>
+</table>
+
+<div *ngIf="selectedMaintenance" class="popup">
+    <mat-icon class="close-icon" (click)="closePopup()">close</mat-icon>
+    <h2 class="center-text">{{ selectedMaintenance.name }}</h2>
+    <p>Unit Number: {{ selectedMaintenance.unitNumber }}</p>
+    <p>Email: {{ selectedMaintenance.email }}</p>
+    <p>Service Type: {{ selectedMaintenance.serviceType }}</p>
+    <p>Summary: {{ selectedMaintenance.summary }}</p>
+    <p>Details: {{ selectedMaintenance.details }}</p>
+    <button [disabled]="!selectedMaintenance.close" mat-raised-button class="center-button" color="primary" (click)="reOpenRequest()">Reopen</button>
+  </div>

@@ -8,25 +8,25 @@
       </mat-card-header>
 
       <mat-card-content>
-        <form class="maint-form">
+        <form class="maint-form" (ngSubmit)="onSubmit()" [formGroup]="form">
           <mat-form-field>
             <mat-label>Apartment Unit #</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="unitNumber"/>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Requester Name</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="name" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Requester Email</mat-label>
-            <input matInput type="email" />
+            <input matInput type="email" formControlName="email" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Service Type</mat-label>
-            <mat-select>
+            <mat-select formControlName="serviceType">
               <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType">
                 {{serviceType}}
               </mat-option>
@@ -35,19 +35,29 @@
 
           <mat-form-field>
             <mat-label>Summary</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="summary"/>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Details</mat-label>
-            <textarea matInput></textarea>
+            <textarea matInput formControlName="details"></textarea>
           </mat-form-field>
 
-          <button mat-raised-button color="accent">
+          <button type="submit" mat-raised-button color="accent" >
             Submit
           </button>
         </form>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
+  <div class="alert" *ngIf="errorMessage">
+    <p>{{ errorMessage.error.message }}</p>
+  </div>  
+  <div *ngIf="successMessage" class="success">
+    <p> {{ successMessage }} </p>
+  </div>
 </mat-grid-list>
+
+
+
+

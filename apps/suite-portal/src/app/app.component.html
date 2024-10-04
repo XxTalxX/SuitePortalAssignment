@@ -2,7 +2,11 @@
   <mat-label>Resident Portal</mat-label>
   <a mat-button [routerLink]="'home'">Home</a>
   <div class="spacer"></div>
-  <a class="admin" mat-button [routerLink]="'admin'">Admin</a>
+  <a *ngIf="!isLoggedIn" class="admin" mat-button routerLink='/admin/login' routerLinkActive="active"> Admin </a>
+  <a *ngIf="isLoggedIn" class="admin" (click)="logOut()"  mat-button routerLink='/home' routerLinkActive="active"> Logout </a>
+  <a class="requests" mat-button routerLink='/maintenance-requests' routerLinkActive="active"> Maintenance Requests </a>
+
+
 </mat-toolbar>
 
 <main>
