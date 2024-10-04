@@ -17,9 +17,11 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { NxModule } from '@nrwl/angular';
 import { LoginEffects } from './login/store/login.effects'
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MaintenanceEffects } from './admin/store/maintenance.effects';
 import { reducers } from './reducers';
+import { LoginInterceptorService } from './login/login-interceptor.service';
+
 
 @NgModule({
   imports: [
@@ -48,7 +50,11 @@ import { reducers } from './reducers';
     EffectsModule.forRoot([LoginEffects, MaintenanceEffects])
   ],
   declarations: [AppComponent, LoginComponent, AdminComponent],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoginInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
