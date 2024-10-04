@@ -41,7 +41,7 @@ export class MaintenanceRequestController {
     return await this.maintenanceRequestService.getMaintenanceRequests();
   }  
 
-  //@UseGuards(LoginGuard)
+  @UseGuards(LoginGuard)
   @Get('/:id')
   public async getMaintenanceRequest(
     @Param('id') id: string,
@@ -52,7 +52,7 @@ export class MaintenanceRequestController {
     return await this.maintenanceRequestService.getMaintenanceRequest(id);
   }
 
-  //@UseGuards(LoginGuard)
+  @UseGuards(LoginGuard)
   @Put('/:id/close')
   public async closeMaintenanceRequest(
     @Param('id') id: string,
@@ -63,7 +63,7 @@ export class MaintenanceRequestController {
     return await this.maintenanceRequestService.closeMaintenanceRequest(id);
   }
 
-    //@UseGuards(LoginGuard)
+    @UseGuards(LoginGuard)
     @Put('/:id/open')
     public async reOpenMaintenanceRequest(
       @Param('id') id: string,

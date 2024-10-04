@@ -32,6 +32,7 @@ export class LoginGuard implements CanActivate {
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
+    console.log(request.headers);
     const [type, token] = (request.headers.authorization as string)?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }

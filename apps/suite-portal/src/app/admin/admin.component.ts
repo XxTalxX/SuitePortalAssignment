@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
       {index: this.selectedMaintenanceIndex, id: this.selectedMaintenance.id}))
     this.closePopup();
     location.reload();
+    //this.selectedMaintenance.close = false;
   }
 
   closePopup() {
