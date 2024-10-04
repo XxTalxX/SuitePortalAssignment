@@ -1,4 +1,3 @@
-/*
 import {
   CanActivate,
   ExecutionContext,
@@ -9,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -25,9 +24,7 @@ export class AuthGuard implements CanActivate {
           secret: 'secret_should_have_value'
         }
       );
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
-      request['user'] = payload;
+      request['admin'] = payload;
     } catch {
       throw new UnauthorizedException();
     }
@@ -35,8 +32,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    const [type, token] = (request.headers.authorization as string).split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 }
-*/

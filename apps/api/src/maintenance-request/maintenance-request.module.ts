@@ -3,7 +3,7 @@ import { MaintenanceRequestController } from './maintenance-request.controller';
 import { MaintenanceRequestDao } from './maintenance-request.dao';
 import { MaintenanceRequestService } from './maintenance-request.service';
 import { JwtService } from '@nestjs/jwt';
-//import { LoginGuard } from '../app/admin/login.guard';
+import { LoginGuard } from '../app/admin/login.guard';
 
 
 @Module({
@@ -13,7 +13,7 @@ import { JwtService } from '@nestjs/jwt';
     MaintenanceRequestService,
     MaintenanceRequestDao,
     JwtService,
-  //  LoginGuard
+    LoginGuard
   ],
 })
 export class MaintenanceRequestModule {}

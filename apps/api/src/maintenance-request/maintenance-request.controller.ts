@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Post, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { MaintenanceRequest } from '@suiteportal/api-interfaces';
 import { MaintenanceRequestService } from './maintenance-request.service';
-//import { LoginGuard } from '../app/admin/login.guard';
+import { LoginGuard } from '../app/admin/login.guard';
 
 @Controller('maintenance-requests')
 export class MaintenanceRequestController {

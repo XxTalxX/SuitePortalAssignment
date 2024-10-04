@@ -3,7 +3,7 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { AdminDao } from './admin.dao';
 import { JwtService } from '@nestjs/jwt';
-// import { LoginGuard } from './login.guard';
+import { LoginGuard } from './login.guard';
 
 @Module({
   controllers: [AdminController],
@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
     AdminService,
     AdminDao,
     JwtService,
-   // LoginGuard
+    LoginGuard
   ],
 })
 export class AdminModule {}
