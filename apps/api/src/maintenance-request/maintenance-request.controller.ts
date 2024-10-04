@@ -35,7 +35,7 @@ export class MaintenanceRequestController {
     maintenanceRequest["close"] = false;
     return await this.maintenanceRequestService.createMaintenanceRequest(maintenanceRequest);
   }
-  //@UseGuards(LoginGuard)
+  @UseGuards(LoginGuard)
   @Get('/')
   public async getMaintenanceRequests() {
     return await this.maintenanceRequestService.getMaintenanceRequests();
